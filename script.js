@@ -1,46 +1,95 @@
-/* =========================================================
+/* =====================================================
    REBE IMRAN PORTFOLIO
-   Main JavaScript
-========================================================= */
+   MAIN JAVASCRIPT
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =================================================
+       MOBILE NAVIGATION
+    ================================================= */
+
+    const menuButton = document.getElementById("menuButton");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuButton && navMenu) {
+
+        menuButton.addEventListener("click", () => {
+
+            navMenu.classList.toggle("active");
+
+            const icon = menuButton.querySelector("i");
+
+            if (navMenu.classList.contains("active")) {
+
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Close navigation"
+                );
+
+            } else {
+
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Open navigation"
+                );
+            }
+
+        });
 
 
-/* =========================================================
-   MOBILE NAVIGATION
-========================================================= */
+        /* Close menu when navigation link is clicked */
 
-const menuButton = document.getElementById("menuButton");
-const navMenu = document.getElementById("navMenu");
+        const navLinks = navMenu.querySelectorAll("a");
 
-if (menuButton && navMenu) {
+        navLinks.forEach(link => {
 
-    menuButton.addEventListener("click", function () {
+            link.addEventListener("click", () => {
 
-        navMenu.classList.toggle("active");
+                navMenu.classList.remove("active");
 
-        const icon = menuButton.querySelector("i");
+                const icon = menuButton.querySelector("i");
 
-        if (navMenu.classList.contains("active")) {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
 
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-xmark");
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Open navigation"
+                );
 
-        } else {
+            });
 
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
+        });
 
-        }
-
-    });
+    }
 
 
-    /* Close menu after clicking a link */
+    /* =================================================
+       CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+    ================================================= */
 
-    const navLinks = navMenu.querySelectorAll("a");
+    document.addEventListener("click", (event) => {
 
-    navLinks.forEach(function (link) {
+        if (!navMenu || !menuButton) return;
 
-        link.addEventListener("click", function () {
+        const clickedInsideMenu =
+            navMenu.contains(event.target);
+
+        const clickedButton =
+            menuButton.contains(event.target);
+
+        if (
+            navMenu.classList.contains("active") &&
+            !clickedInsideMenu &&
+            !clickedButton
+        ) {
 
             navMenu.classList.remove("active");
 
@@ -49,61 +98,97 @@ if (menuButton && navMenu) {
             icon.classList.remove("fa-xmark");
             icon.classList.add("fa-bars");
 
+        }
+
+    });
+
+
+    /* =================================================
+       PROJECT MODAL
+    ================================================= */
+
+    const projectModal =
+        document.getElementById("projectModal");
+
+    const modalOverlay =
+        document.getElementById("modalOverlay");
+
+    const modalClose =
+        document.getElementById("modalClose");
+
+    const modalImage =
+        document.getElementById("modalImage");
+
+    const modalTitle =
+        document.getElementById("modalTitle");
+
+    const modalDescription =
+        document.getElementById("modalDescription");
+
+
+    const projectButtons =
+        document.querySelectorAll(".view-project");
+
+
+    /* Open project modal */
+
+    projectButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const image =
+                button.getAttribute("data-image");
+
+            const title =
+                button.getAttribute("data-title");
+
+            const description =
+                button.getAttribute("data-description");
+
+
+            if (modalImage) {
+
+                modalImage.src = image;
+
+                modalImage.alt = title;
+
+            }
+
+
+            if (modalTitle) {
+
+                modalTitle.textContent =
+                    title || "Project";
+
+            }
+
+
+            if (modalDescription) {
+
+                modalDescription.textContent =
+                    description || "";
+
+            }
+
+
+            if (projectModal) {
+
+                projectModal.classList.add("active");
+
+                document.body.style.overflow = "hidden";
+
+            }
+
         });
 
     });
 
-}
 
+    /* Close modal function */
 
-/* =========================================================
-   PROJECT MODAL
-========================================================= */
+    function closeModal() {
 
-const projectModal = document.getElementById("projectModal");
-const modalOverlay = document.getElementById("modalOverlay");
-const modalClose = document.getElementById("modalClose");
-
-const modalImage = document.getElementById("modalImage");
-const modalTitle = document.getElementById("modalTitle");
-const modalDescription = document.getElementById("modalDescription");
-
-const projectButtons = document.querySelectorAll(".view-project");
-
-
-function openProjectModal(button) {
-
-    const image = button.getAttribute("data-image");
-    const title = button.getAttribute("data-title");
-    const description = button.getAttribute("data-description");
-
-    if (modalImage) {
-        modalImage.src = image;
-        modalImage.alt = title;
-    }
-
-    if (modalTitle) {
-        modalTitle.textContent = title;
-    }
-
-    if (modalDescription) {
-        modalDescription.textContent = description;
-    }
-
-    if (projectModal) {
-
-        projectModal.classList.add("active");
-
-        document.body.style.overflow = "hidden";
-
-    }
-
-}
-
-
-function closeProjectModal() {
-
-    if (projectModal) {
+        if (!projectModal) return;
 
         projectModal.classList.remove("active");
 
@@ -111,256 +196,413 @@ function closeProjectModal() {
 
     }
 
-}
 
+    if (modalClose) {
 
-projectButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        openProjectModal(button);
-
-    });
-
-});
-
-
-if (modalClose) {
-
-    modalClose.addEventListener("click", function () {
-
-        closeProjectModal();
-
-    });
-
-}
-
-
-if (modalOverlay) {
-
-    modalOverlay.addEventListener("click", function () {
-
-        closeProjectModal();
-
-    });
-
-}
-
-
-/* Close modal with Escape key */
-
-document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-
-        closeProjectModal();
+        modalClose.addEventListener(
+            "click",
+            closeModal
+        );
 
     }
 
-});
 
+    if (modalOverlay) {
 
-/* =========================================================
-   IMAGE ERROR HANDLING
-========================================================= */
-
-const profileImage = document.querySelector(".dp");
-
-if (profileImage) {
-
-    profileImage.addEventListener("error", function () {
-
-        console.warn(
-            "DP image could not be loaded. Make sure the file is named dp.jpeg."
+        modalOverlay.addEventListener(
+            "click",
+            closeModal
         );
 
+    }
+
+
+    /* =================================================
+       ESC KEY CLOSES MODAL
+    ================================================= */
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+
+            closeModal();
+
+        }
+
     });
 
-}
 
+    /* =================================================
+       SMOOTH SCROLL
+    ================================================= */
 
-const cvImage = document.querySelector(".cv-preview img");
-
-if (cvImage) {
-
-    cvImage.addEventListener("error", function () {
-
-        console.warn(
-            "CV image could not be loaded. Make sure the file is named cv.jpeg."
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
         );
 
-    });
 
-}
+    internalLinks.forEach(link => {
 
+        link.addEventListener("click", event => {
 
-/* =========================================================
-   ACTIVE NAVIGATION
-========================================================= */
+            const targetId =
+                link.getAttribute("href");
 
-const sections = document.querySelectorAll("section[id]");
-const navigationLinks = document.querySelectorAll(".nav-menu a");
-
-function updateActiveNavigation() {
-
-    let currentSection = "";
-
-    sections.forEach(function (section) {
-
-        const sectionTop = section.offsetTop - 150;
-        const sectionHeight = section.offsetHeight;
-
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-        ) {
-
-            currentSection = section.getAttribute("id");
-
-        }
-
-    });
+            if (
+                !targetId ||
+                targetId === "#"
+            ) {
+                return;
+            }
 
 
-    navigationLinks.forEach(function (link) {
-
-        link.classList.remove("active");
-
-        const href = link.getAttribute("href");
-
-        if (href === "#" + currentSection) {
-
-            link.classList.add("active");
-
-        }
-
-    });
-
-}
+            const target =
+                document.querySelector(targetId);
 
 
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation,
-    { passive: true }
-);
-
-updateActiveNavigation();
+            if (!target) return;
 
 
-/* =========================================================
-   SMOOTH INTERNAL LINKS
-========================================================= */
+            event.preventDefault();
 
-const internalLinks = document.querySelectorAll(
-    'a[href^="#"]'
-);
 
-internalLinks.forEach(function (link) {
+            const navbar =
+                document.querySelector(".navbar");
 
-    link.addEventListener("click", function (event) {
 
-        const targetId = link.getAttribute("href");
+            const navbarHeight =
+                navbar
+                    ? navbar.offsetHeight
+                    : 0;
 
-        if (
-            targetId === "#" ||
-            !targetId
-        ) {
-            return;
-        }
 
-        const target = document.querySelector(targetId);
+            const targetPosition =
+                target.getBoundingClientRect().top +
+                window.pageYOffset -
+                navbarHeight;
 
-        if (!target) {
-            return;
-        }
 
-        event.preventDefault();
+            window.scrollTo({
 
-        const navbarHeight = document.querySelector(
-            ".navbar"
-        )?.offsetHeight || 0;
+                top: targetPosition,
 
-        const targetPosition =
-            target.getBoundingClientRect().top +
-            window.scrollY -
-            navbarHeight;
+                behavior: "smooth"
 
-        window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth"
+            });
+
         });
 
     });
 
-});
+
+    /* =================================================
+       ACTIVE NAVIGATION LINK
+    ================================================= */
+
+    const sections =
+        document.querySelectorAll(
+            "section[id]"
+        );
+
+    const navigationLinks =
+        document.querySelectorAll(
+            ".nav-menu a"
+        );
 
 
-/* =========================================================
-   PREVENT BROKEN PROJECT IMAGES FROM LOOKING EMPTY
-========================================================= */
+    function updateActiveNavigation() {
 
-const projectImages = document.querySelectorAll(
-    ".project-image img"
-);
-
-projectImages.forEach(function (image) {
-
-    image.addEventListener("error", function () {
-
-        image.style.display = "none";
-
-        const parent = image.parentElement;
-
-        if (parent) {
-
-            parent.style.background =
-                "linear-gradient(135deg,#eee7df,#d9d0c5)";
-
-        }
-
-    });
-
-});
+        let currentSection = "";
 
 
-/* =========================================================
-   PAGE LOADED
-========================================================= */
+        sections.forEach(section => {
 
-document.addEventListener("DOMContentLoaded", function () {
+            const sectionTop =
+                section.offsetTop - 140;
 
-    document.body.classList.add("loaded");
+            const sectionHeight =
+                section.offsetHeight;
 
-});
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY <
+                sectionTop + sectionHeight
+            ) {
 
-
-/* =========================================================
-   RESIZE SAFETY
-========================================================= */
-
-window.addEventListener("resize", function () {
-
-    if (
-        window.innerWidth > 800 &&
-        navMenu
-    ) {
-
-        navMenu.classList.remove("active");
-
-        if (menuButton) {
-
-            const icon = menuButton.querySelector("i");
-
-            if (icon) {
-
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
+                currentSection =
+                    section.getAttribute("id");
 
             }
 
-        }
+        });
+
+
+        navigationLinks.forEach(link => {
+
+            link.classList.remove("active");
+
+            const href =
+                link.getAttribute("href");
+
+
+            if (
+                href ===
+                "#" + currentSection
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
 
     }
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation,
+        { passive: true }
+    );
+
+
+    updateActiveNavigation();
+
+
+    /* =================================================
+       CV / DP IMAGE FALLBACK CHECK
+    ================================================= */
+
+    const dpImage =
+        document.querySelector(".dp");
+
+    const cvImage =
+        document.querySelector(".cv-preview img");
+
+
+    /*
+       DP fallback:
+       If dp.jpeg cannot be found, keep the alt text
+       visible instead of showing a broken layout.
+    */
+
+    if (dpImage) {
+
+        dpImage.addEventListener(
+            "error",
+            () => {
+
+                dpImage.style.display = "none";
+
+                const parent =
+                    dpImage.parentElement;
+
+                if (parent) {
+
+                    parent.setAttribute(
+                        "data-image-error",
+                        "Profile image could not be loaded"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /*
+       CV fallback:
+       The CV itself remains clickable through the
+       Open CV / Download CV buttons.
+    */
+
+    if (cvImage) {
+
+        cvImage.addEventListener(
+            "error",
+            () => {
+
+                cvImage.style.display = "none";
+
+                const preview =
+                    cvImage.parentElement;
+
+                if (preview) {
+
+                    preview.classList.add(
+                        "cv-image-error"
+                    );
+
+                    preview.setAttribute(
+                        "data-message",
+                        "CV image could not be loaded"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       CURRENT YEAR
+    ================================================= */
+
+    const footerYear =
+        document.querySelector(
+            ".footer-bottom span"
+        );
+
+
+    if (footerYear) {
+
+        footerYear.innerHTML =
+            footerYear.innerHTML.replace(
+                "2026",
+                new Date().getFullYear()
+            );
+
+    }
+
+
+    /* =================================================
+       PREVENT BODY HORIZONTAL OVERFLOW
+    ================================================= */
+
+    document.body.style.overflowX = "hidden";
+
+
+    /* =================================================
+       BUTTON CLICK FEEDBACK
+    ================================================= */
+
+    const buttons =
+        document.querySelectorAll(
+            ".btn, .cv-btn, .top-whatsapp"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                button.classList.add(
+                    "clicked"
+                );
+
+
+                setTimeout(() => {
+
+                    button.classList.remove(
+                        "clicked"
+                    );
+
+                }, 250);
+
+            }
+        );
+
+    });
+
+
+    /* =================================================
+       IMAGE LOADING
+    ================================================= */
+
+    const allImages =
+        document.querySelectorAll("img");
+
+
+    allImages.forEach(image => {
+
+        image.addEventListener(
+            "load",
+            () => {
+
+                image.classList.add(
+                    "image-loaded"
+                );
+
+            }
+        );
+
+    });
+
+
+    /* =================================================
+       RESIZE HANDLER
+    ================================================= */
+
+    let resizeTimer;
+
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(resizeTimer);
+
+
+            resizeTimer =
+                setTimeout(() => {
+
+                    /*
+                       Automatically close mobile
+                       navigation when switching back
+                       to desktop width.
+                    */
+
+                    if (
+                        window.innerWidth > 800 &&
+                        navMenu
+                    ) {
+
+                        navMenu.classList.remove(
+                            "active"
+                        );
+
+                        if (menuButton) {
+
+                            const icon =
+                                menuButton.querySelector(
+                                    "i"
+                                );
+
+                            if (icon) {
+
+                                icon.classList.remove(
+                                    "fa-xmark"
+                                );
+
+                                icon.classList.add(
+                                    "fa-bars"
+                                );
+
+                            }
+
+                        }
+
+                    }
+
+                }, 150);
+
+        }
+    );
+
+
+    /* =================================================
+       CONSOLE MESSAGE
+    ================================================= */
+
+    console.log(
+        "Rebe Imran Portfolio loaded successfully."
+    );
 
 });
