@@ -1,373 +1,192 @@
-/* =========================================================
-   REBE IMRAN PORTFOLIO JAVASCRIPT
-   ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================
-       HEADER SCROLL
-    ========================== */
-
-    const header = document.getElementById("siteHeader");
-
-    window.addEventListener("scroll", () => {
-
-        if (window.scrollY > 40) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-
-    });
-
-
-    /* =========================
+    /* =========================================
        MOBILE MENU
-    ========================== */
+    ========================================= */
 
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
 
-    menuToggle.addEventListener("click", () => {
+    if (menuBtn && navLinks) {
 
-        mainNav.classList.toggle("open");
+        menuBtn.addEventListener("click", () => {
 
-    });
+            navLinks.classList.toggle("open");
 
+            const icon = menuBtn.querySelector("i");
 
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    navLinks.forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            mainNav.classList.remove("open");
-
-        });
-
-    });
-
-
-    /* =========================
-       ACTIVE NAVIGATION
-    ========================== */
-
-    const sections = document.querySelectorAll("section[id]");
-
-    window.addEventListener("scroll", () => {
-
-        let currentSection = "";
-
-        sections.forEach(section => {
-
-            const sectionTop =
-                section.offsetTop - 160;
-
-            const sectionHeight =
-                section.offsetHeight;
-
-            if (
-                window.scrollY >= sectionTop &&
-                window.scrollY < sectionTop + sectionHeight
-            ) {
-                currentSection = section.id;
+            if (navLinks.classList.contains("open")) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+            } else {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
             }
 
         });
 
-        navLinks.forEach(link => {
 
-            link.classList.remove("active");
+        navLinks.querySelectorAll("a").forEach(link => {
 
-            if (
-                link.getAttribute("href") ===
-                `#${currentSection}`
-            ) {
-                link.classList.add("active");
-            }
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("open");
+
+                const icon = menuBtn.querySelector("i");
+
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            });
 
         });
 
-    });
+    }
 
 
-    /* =========================
-       PROJECT FILTER
-    ========================== */
+    /* =========================================
+       PROJECT MODAL
+    ========================================= */
 
-    const filterButtons =
-        document.querySelectorAll(".filter-btn");
+    const modal = document.getElementById("projectModal");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalClose = document.getElementById("modalClose");
 
-    const projectCards =
-        document.querySelectorAll(".project-card");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+
+    const projectButtons = document.querySelectorAll(".view-project");
 
 
-    filterButtons.forEach(button => {
+    function openModal(button) {
+
+        const title = button.getAttribute("data-title");
+        const description = button.getAttribute("data-description");
+        const image = button.getAttribute("data-image");
+
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+
+        modalImage.src = image;
+        modalImage.alt = title;
+
+        modal.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeModal() {
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    projectButtons.forEach(button => {
 
         button.addEventListener("click", () => {
 
-            filterButtons.forEach(btn => {
-                btn.classList.remove("active");
-            });
-
-            button.classList.add("active");
-
-            const selectedFilter =
-                button.dataset.filter;
-
-
-            projectCards.forEach(card => {
-
-                const category =
-                    card.dataset.category;
-
-                if (
-                    selectedFilter === "all" ||
-                    category === selectedFilter
-                ) {
-
-                    card.classList.remove("hide");
-
-                } else {
-
-                    card.classList.add("hide");
-
-                }
-
-            });
+            openModal(button);
 
         });
 
     });
 
 
-    /* =========================
-       PROJECT MODAL
-    ========================== */
+    if (modalClose) {
 
-    const projectModal =
-        document.getElementById("projectModal");
-
-    const modalBackdrop =
-        document.getElementById("modalBackdrop");
-
-    const modalClose =
-        document.getElementById("modalClose");
-
-    const modalImage =
-        document.getElementById("modalImage");
-
-    const modalTitle =
-        document.getElementById("modalTitle");
-
-    const modalType =
-        document.getElementById("modalType");
-
-    const modalDescription =
-        document.getElementById("modalDescription");
-
-
-    function openProject(card) {
-
-        const title =
-            card.dataset.title;
-
-        const type =
-            card.dataset.type;
-
-        const image =
-            card.dataset.image;
-
-        const description =
-            card.dataset.description;
-
-
-        modalTitle.textContent = title;
-
-        modalType.textContent = type;
-
-        modalDescription.textContent =
-            description;
-
-        modalImage.src = image;
-
-        modalImage.alt =
-            `${title} project`;
-
-
-        projectModal.classList.add("active");
-
-        projectModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body.classList.add("modal-open");
+        modalClose.addEventListener("click", closeModal);
 
     }
 
 
-    function closeProject() {
+    if (modalBackdrop) {
 
-        projectModal.classList.remove("active");
-
-        projectModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.classList.remove("modal-open");
-
-        setTimeout(() => {
-
-            modalImage.src = "";
-
-        }, 250);
+        modalBackdrop.addEventListener("click", closeModal);
 
     }
 
-
-    projectCards.forEach(card => {
-
-        card.addEventListener("click", () => {
-
-            openProject(card);
-
-        });
-
-    });
-
-
-    modalClose.addEventListener(
-        "click",
-        closeProject
-    );
-
-    modalBackdrop.addEventListener(
-        "click",
-        closeProject
-    );
-
-
-    /* =========================
-       CV MODAL
-    ========================== */
-
-    const cvModal =
-        document.getElementById("cvModal");
-
-    const cvModalBackdrop =
-        document.getElementById("cvModalBackdrop");
-
-    const cvModalClose =
-        document.getElementById("cvModalClose");
-
-    const viewCvBtn =
-        document.getElementById("viewCvBtn");
-
-
-    function openCV() {
-
-        cvModal.classList.add("active");
-
-        cvModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body.classList.add("modal-open");
-
-    }
-
-
-    function closeCV() {
-
-        cvModal.classList.remove("active");
-
-        cvModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.classList.remove("modal-open");
-
-    }
-
-
-    viewCvBtn.addEventListener(
-        "click",
-        openCV
-    );
-
-    cvModalClose.addEventListener(
-        "click",
-        closeCV
-    );
-
-    cvModalBackdrop.addEventListener(
-        "click",
-        closeCV
-    );
-
-
-    /* =========================
-       ESCAPE KEY
-    ========================== */
 
     document.addEventListener("keydown", event => {
 
         if (event.key === "Escape") {
 
-            closeProject();
-            closeCV();
+            closeModal();
 
         }
 
     });
 
 
-    /* =========================
-       SIMPLE REVEAL
-    ========================== */
+    /* =========================================
+       ACTIVE NAVIGATION
+    ========================================= */
 
-    const revealElements =
-        document.querySelectorAll(
-            ".service-card, .project-card, .detail, .skill-tag"
-        );
+    const sections = document.querySelectorAll("main section[id]");
+    const links = document.querySelectorAll(".nav-links a");
 
+    function updateActiveNav() {
 
-    const revealObserver =
-        new IntersectionObserver(
-            entries => {
+        let currentSection = "";
 
-                entries.forEach(entry => {
+        sections.forEach(section => {
 
-                    if (entry.isIntersecting) {
+            const sectionTop = section.offsetTop - 120;
 
-                        entry.target.classList.add(
-                            "revealed"
-                        );
+            if (window.scrollY >= sectionTop) {
 
-                        revealObserver.unobserve(
-                            entry.target
-                        );
+                currentSection = section.getAttribute("id");
 
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12
             }
-        );
+
+        });
 
 
-    revealElements.forEach(element => {
+        links.forEach(link => {
 
-        element.classList.add("reveal-ready");
+            link.classList.remove("active");
 
-        revealObserver.observe(element);
+            if (
+                link.getAttribute("href") ===
+                "#" + currentSection
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+
+    window.addEventListener("scroll", updateActiveNav);
+
+    updateActiveNav();
+
+
+    /* =========================================
+       IMAGE ERROR HANDLING
+       Keeps broken images from looking confusing.
+    ========================================= */
+
+    const images = document.querySelectorAll("img");
+
+    images.forEach(img => {
+
+        img.addEventListener("error", () => {
+
+            console.warn(
+                "Image could not be loaded:",
+                img.getAttribute("src")
+            );
+
+        });
 
     });
 
