@@ -8,7 +8,7 @@
 
     <meta
         name="description"
-        content="Rebe Imran — Freelance Graphic Designer and Brand Identity Specialist."
+        content="Rebe Imran - Freelance Graphic Designer and Brand Identity Specialist."
     >
 
     <link rel="stylesheet" href="style.css">
@@ -21,44 +21,46 @@
 
 <body>
 
-<!-- =========================================
-     NAVBAR
-========================================= -->
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
 <header class="navbar">
 
     <div class="nav-container">
 
         <a href="#home" class="brand">
-            <span class="brand-mark">R</span>
-            <span class="brand-name">Rebe Imran</span>
+            <span class="brand-logo">R</span>
+            <span class="brand-text">Rebe Imran</span>
         </a>
 
-        <nav class="nav-links" id="navLinks">
+        <nav class="nav-menu" id="navMenu">
 
             <a href="#home">Home</a>
             <a href="#about">About</a>
+            <a href="#services">Services</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
 
         </nav>
 
-        <div class="nav-actions">
+        <div class="nav-right">
 
             <a
+                class="whatsapp-top"
                 href="https://wa.me/923335455760"
                 target="_blank"
-                rel="noopener"
-                class="whatsapp-top"
+                rel="noopener noreferrer"
             >
                 <i class="fa-brands fa-whatsapp"></i>
-                WhatsApp
+                <span>WhatsApp</span>
             </a>
 
             <button
-                class="menu-btn"
-                id="menuBtn"
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
                 aria-label="Open menu"
             >
                 <i class="fa-solid fa-bars"></i>
@@ -71,29 +73,27 @@
 </header>
 
 
-<!-- =========================================
+<!-- =====================================================
      HERO
-========================================= -->
-
-<main>
+===================================================== -->
 
 <section class="hero" id="home">
 
     <div class="hero-container">
 
-        <div class="hero-content">
+        <div class="hero-left">
 
-            <div class="small-label">
-                <span></span>
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
                 FREELANCE GRAPHIC DESIGNER
             </div>
 
             <h1>
                 Creative visuals
-                <strong>that make brands stand out.</strong>
+                <span>that make brands stand out.</span>
             </h1>
 
-            <p class="hero-description">
+            <p class="hero-text">
                 I'm Rebe Imran, a freelance graphic designer focused on
                 creating modern, attractive and meaningful visual designs
                 for businesses, brands and social media.
@@ -101,16 +101,17 @@
 
             <div class="hero-buttons">
 
-                <a href="#projects" class="btn btn-gold">
+                <a href="#projects" class="button primary-button">
                     View My Work
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
 
                 <a
-                    href="CV.jpeg"
+                    href="cv.jpeg"
+                    class="button secondary-button"
+                    id="heroCvButton"
                     target="_blank"
-                    rel="noopener"
-                    class="btn btn-outline"
+                    rel="noopener noreferrer"
                 >
                     View CV
                     <i class="fa-solid fa-file-image"></i>
@@ -118,40 +119,52 @@
 
             </div>
 
-            <div class="hero-socials">
+            <div class="social-area">
 
                 <span>Connect with me</span>
 
-                <div class="social-row">
+                <div class="social-icons">
 
+                    <!-- WHATSAPP -->
                     <a
                         href="https://wa.me/923335455760"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
+                        class="social-icon whatsapp"
                         aria-label="WhatsApp"
-                        class="social whatsapp"
                     >
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
 
+                    <!-- INSTAGRAM -->
                     <a
                         href="https://www.instagram.com/"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
+                        class="social-icon instagram"
                         aria-label="Instagram"
-                        class="social instagram"
                     >
                         <i class="fa-brands fa-instagram"></i>
                     </a>
 
+                    <!-- FACEBOOK -->
                     <a
                         href="https://www.facebook.com/"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
+                        class="social-icon facebook"
                         aria-label="Facebook"
-                        class="social facebook"
                     >
                         <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <!-- GMAIL -->
+                    <a
+                        href="mailto:rebeimran@gmail.com"
+                        class="social-icon gmail"
+                        aria-label="Gmail"
+                    >
+                        <i class="fa-solid fa-envelope"></i>
                     </a>
 
                 </div>
@@ -163,33 +176,35 @@
 
         <!-- PROFILE -->
 
-        <div class="hero-profile">
+        <div class="hero-right">
 
-            <div class="profile-circle-decoration"></div>
+            <div class="profile-ring"></div>
 
-            <div class="profile-photo-wrap">
+            <div class="profile-photo-container">
 
                 <img
                     src="dp.jpeg"
                     alt="Rebe Imran - Graphic Designer"
                     class="profile-photo"
+                    id="profilePhoto"
                 >
 
             </div>
 
-            <div class="profile-info">
+            <div class="profile-name-card">
 
                 <strong>Rebe Imran</strong>
 
-                <span>
-                    Graphic Designer
-                </span>
+                <span>Graphic Designer</span>
 
             </div>
 
-            <div class="profile-badge">
+            <div class="designer-badge">
+
                 <i class="fa-solid fa-pen-nib"></i>
+
                 Creative Designer
+
             </div>
 
         </div>
@@ -199,17 +214,17 @@
 </section>
 
 
-<!-- =========================================
+<!-- =====================================================
      ABOUT
-========================================= -->
+===================================================== -->
 
-<section class="section about" id="about">
+<section class="section about-section" id="about">
 
     <div class="container">
 
         <div class="section-heading">
 
-            <div class="section-label">
+            <div class="section-number">
                 01 — ABOUT ME
             </div>
 
@@ -223,45 +238,66 @@
 
         <div class="about-grid">
 
-            <div class="about-cv">
+            <!-- CV -->
+
+            <div class="cv-area">
 
                 <div class="cv-card">
 
-                    <div class="cv-card-top">
+                    <div class="cv-header">
 
-                        <span>
-                            MY CREDENTIALS
-                        </span>
+                        <span>MY CREDENTIALS</span>
 
                         <i class="fa-solid fa-file-lines"></i>
 
                     </div>
 
-                    <div class="cv-image">
+
+                    <div class="cv-preview">
 
                         <img
-                            src="CV.jpeg"
+                            src="cv.jpeg"
                             alt="Rebe Imran CV"
+                            id="cvImage"
                         >
+
+                        <div
+                            class="cv-error"
+                            id="cvError"
+                        >
+                            <i class="fa-solid fa-image"></i>
+
+                            <strong>CV image not found</strong>
+
+                            <small>
+                                Make sure the file is named
+                                <b>cv.jpeg</b>
+                                and is inside the same folder as index.html.
+                            </small>
+
+                        </div>
 
                     </div>
 
-                    <div class="cv-card-bottom">
+
+                    <div class="cv-buttons">
 
                         <a
-                            href="CV.jpeg"
+                            href="cv.jpeg"
                             target="_blank"
-                            rel="noopener"
-                            class="cv-button"
+                            rel="noopener noreferrer"
+                            class="cv-button open-cv"
+                            id="openCv"
                         >
-                            <i class="fa-solid fa-expand"></i>
+                            <i class="fa-solid fa-up-right-from-square"></i>
                             Open CV
                         </a>
 
                         <a
-                            href="CV.jpeg"
+                            href="cv.jpeg"
                             download="Rebe_Imran_CV.jpeg"
-                            class="cv-button download"
+                            class="cv-button download-cv"
+                            id="downloadCv"
                         >
                             <i class="fa-solid fa-download"></i>
                             Download CV
@@ -274,9 +310,11 @@
             </div>
 
 
-            <div class="about-text">
+            <!-- ABOUT TEXT -->
 
-                <span class="hello">
+            <div class="about-content">
+
+                <span class="about-small-title">
                     HELLO, I'M REBE
                 </span>
 
@@ -300,29 +338,29 @@
 
                 <p>
                     Every project is approached with creative thinking,
-                    attention to detail, time management and clear client
+                    attention to detail, time management and clear
                     communication.
                 </p>
 
 
-                <div class="about-details">
+                <div class="about-information">
 
-                    <div>
+                    <div class="information-item">
                         <span>LOCATION</span>
                         <strong>Mandi Bahauddin, Pakistan</strong>
                     </div>
 
-                    <div>
+                    <div class="information-item">
                         <span>EDUCATION</span>
                         <strong>Master in Political Science</strong>
                     </div>
 
-                    <div>
+                    <div class="information-item">
                         <span>TOOLS</span>
                         <strong>Canva & Adobe Photoshop</strong>
                     </div>
 
-                    <div>
+                    <div class="information-item">
                         <span>LANGUAGES</span>
                         <strong>English & Urdu</strong>
                     </div>
@@ -338,17 +376,17 @@
 </section>
 
 
-<!-- =========================================
+<!-- =====================================================
      SERVICES
-========================================= -->
+===================================================== -->
 
-<section class="section services" id="services">
+<section class="section services-section" id="services">
 
     <div class="container">
 
-        <div class="section-heading centered">
+        <div class="section-heading center-heading">
 
-            <div class="section-label">
+            <div class="section-number">
                 02 — SERVICES
             </div>
 
@@ -364,11 +402,15 @@
 
             <div class="service-card">
 
-                <div class="service-icon">
-                    <i class="fa-solid fa-pen-nib"></i>
-                </div>
+                <div class="service-top">
 
-                <span class="service-number">01</span>
+                    <div class="service-icon">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+
+                    <span>01</span>
+
+                </div>
 
                 <h3>Logo Design</h3>
 
@@ -382,11 +424,15 @@
 
             <div class="service-card">
 
-                <div class="service-icon">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
+                <div class="service-top">
 
-                <span class="service-number">02</span>
+                    <div class="service-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                    <span>02</span>
+
+                </div>
 
                 <h3>Brand Identity</h3>
 
@@ -400,17 +446,21 @@
 
             <div class="service-card">
 
-                <div class="service-icon">
-                    <i class="fa-solid fa-hashtag"></i>
-                </div>
+                <div class="service-top">
 
-                <span class="service-number">03</span>
+                    <div class="service-icon">
+                        <i class="fa-solid fa-hashtag"></i>
+                    </div>
+
+                    <span>03</span>
+
+                </div>
 
                 <h3>Social Media Design</h3>
 
                 <p>
-                    Engaging social media posts designed for Instagram,
-                    Facebook and other platforms.
+                    Engaging social media graphics designed for
+                    businesses and personal brands.
                 </p>
 
             </div>
@@ -418,17 +468,21 @@
 
             <div class="service-card">
 
-                <div class="service-icon">
-                    <i class="fa-solid fa-image"></i>
-                </div>
+                <div class="service-top">
 
-                <span class="service-number">04</span>
+                    <div class="service-icon">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+
+                    <span>04</span>
+
+                </div>
 
                 <h3>Posters & Flyers</h3>
 
                 <p>
                     Eye-catching promotional graphics that communicate
-                    your offer clearly.
+                    your message clearly.
                 </p>
 
             </div>
@@ -436,17 +490,21 @@
 
             <div class="service-card">
 
-                <div class="service-icon">
-                    <i class="fa-solid fa-play"></i>
-                </div>
+                <div class="service-top">
 
-                <span class="service-number">05</span>
+                    <div class="service-icon">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+
+                    <span>05</span>
+
+                </div>
 
                 <h3>YouTube Thumbnails</h3>
 
                 <p>
-                    Attractive thumbnail designs created to grab attention
-                    and encourage clicks.
+                    Attractive thumbnail designs created to grab
+                    attention and encourage clicks.
                 </p>
 
             </div>
@@ -454,17 +512,21 @@
 
             <div class="service-card">
 
-                <div class="service-icon">
-                    <i class="fa-solid fa-id-card"></i>
-                </div>
+                <div class="service-top">
 
-                <span class="service-number">06</span>
+                    <div class="service-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+
+                    <span>06</span>
+
+                </div>
 
                 <h3>Business Cards</h3>
 
                 <p>
                     Clean, memorable and professional business card
-                    designs for personal brands and companies.
+                    designs for individuals and businesses.
                 </p>
 
             </div>
@@ -476,17 +538,17 @@
 </section>
 
 
-<!-- =========================================
+<!-- =====================================================
      SKILLS
-========================================= -->
+===================================================== -->
 
-<section class="section skills" id="skills">
+<section class="section skills-section" id="skills">
 
     <div class="container skills-grid">
 
-        <div>
+        <div class="skills-introduction">
 
-            <div class="section-label">
+            <div class="section-number">
                 03 — SKILLS
             </div>
 
@@ -495,7 +557,7 @@
                 <span>ideas to life.</span>
             </h2>
 
-            <p class="skills-intro">
+            <p>
                 My approach combines creative thinking, attention to detail,
                 communication and practical design skills.
             </p>
@@ -503,16 +565,16 @@
         </div>
 
 
-        <div class="skill-list">
+        <div class="skills-list">
 
             <div class="skill">
 
-                <div class="skill-header">
+                <div class="skill-heading">
                     <span>Creative Thinking</span>
                     <strong>95%</strong>
                 </div>
 
-                <div class="skill-line">
+                <div class="skill-bar">
                     <span style="width:95%"></span>
                 </div>
 
@@ -521,12 +583,12 @@
 
             <div class="skill">
 
-                <div class="skill-header">
+                <div class="skill-heading">
                     <span>Graphic Design</span>
                     <strong>92%</strong>
                 </div>
 
-                <div class="skill-line">
+                <div class="skill-bar">
                     <span style="width:92%"></span>
                 </div>
 
@@ -535,12 +597,12 @@
 
             <div class="skill">
 
-                <div class="skill-header">
+                <div class="skill-heading">
                     <span>Social Media Design</span>
                     <strong>90%</strong>
                 </div>
 
-                <div class="skill-line">
+                <div class="skill-bar">
                     <span style="width:90%"></span>
                 </div>
 
@@ -549,12 +611,12 @@
 
             <div class="skill">
 
-                <div class="skill-header">
+                <div class="skill-heading">
                     <span>Attention to Detail</span>
                     <strong>94%</strong>
                 </div>
 
-                <div class="skill-line">
+                <div class="skill-bar">
                     <span style="width:94%"></span>
                 </div>
 
@@ -563,12 +625,12 @@
 
             <div class="skill">
 
-                <div class="skill-header">
+                <div class="skill-heading">
                     <span>Client Communication</span>
                     <strong>88%</strong>
                 </div>
 
-                <div class="skill-line">
+                <div class="skill-bar">
                     <span style="width:88%"></span>
                 </div>
 
@@ -581,17 +643,17 @@
 </section>
 
 
-<!-- =========================================
+<!-- =====================================================
      PROJECTS
-========================================= -->
+===================================================== -->
 
-<section class="section projects" id="projects">
+<section class="section projects-section" id="projects">
 
     <div class="container">
 
         <div class="section-heading">
 
-            <div class="section-label">
+            <div class="section-number">
                 04 — SELECTED WORK
             </div>
 
@@ -608,10 +670,10 @@
         </div>
 
 
-        <div class="project-grid">
+        <div class="projects-grid">
 
 
-            <!-- ADMISSION -->
+            <!-- PROJECT 1 -->
 
             <article class="project-card">
 
@@ -619,16 +681,16 @@
 
                     <img
                         src="admission.png"
-                        alt="Academy Admission Poster"
+                        alt="Academy Admission Campaign"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
-                            data-title="Academy Admission Campaign"
-                            data-description="A promotional admission campaign designed for an educational academy with a clear and attractive information layout."
+                            class="project-button"
                             data-image="admission.png"
+                            data-title="Academy Admission Campaign"
+                            data-description="A promotional admission campaign designed for an educational academy."
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -638,24 +700,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>POSTER DESIGN</span>
 
-                    <h3>
-                        Academy Admission Campaign
-                    </h3>
+                    <h3>Academy Admission Campaign</h3>
 
-                    <p>
-                        Educational promotional design.
-                    </p>
+                    <p>Educational promotional design.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- JUICE -->
+            <!-- PROJECT 2 -->
 
             <article class="project-card">
 
@@ -666,13 +724,13 @@
                         alt="Fresh Juice Poster"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
+                            class="project-button"
+                            data-image="juice.png"
                             data-title="Fresh & Healthy Juice"
                             data-description="A fresh promotional poster created for a juice and beverage campaign."
-                            data-image="juice.png"
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -682,24 +740,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>ADVERTISING</span>
 
-                    <h3>
-                        Fresh & Healthy Juice
-                    </h3>
+                    <h3>Fresh & Healthy Juice</h3>
 
-                    <p>
-                        Food and beverage promotional design.
-                    </p>
+                    <p>Food and beverage promotional design.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- PIZZA -->
+            <!-- PROJECT 3 -->
 
             <article class="project-card">
 
@@ -707,16 +761,16 @@
 
                     <img
                         src="pizza.png"
-                        alt="Pizza Point Menu Design"
+                        alt="Pizza Point"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
-                            data-title="Pizza Point"
-                            data-description="Restaurant menu and promotional layout created to present food items and offers clearly."
+                            class="project-button"
                             data-image="pizza.png"
+                            data-title="Pizza Point"
+                            data-description="Restaurant menu and promotional design created to present food items clearly."
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -726,24 +780,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>FOOD DESIGN</span>
 
-                    <h3>
-                        Pizza Point
-                    </h3>
+                    <h3>Pizza Point</h3>
 
-                    <p>
-                        Restaurant menu and promotional design.
-                    </p>
+                    <p>Restaurant menu and promotional design.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- BIRYANI -->
+            <!-- PROJECT 4 -->
 
             <article class="project-card">
 
@@ -751,16 +801,16 @@
 
                     <img
                         src="biryani.png"
-                        alt="Aroma House Biryani Poster"
+                        alt="Aroma House Restaurant"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
+                            class="project-button"
+                            data-image="biryani.png"
                             data-title="Aroma House Restaurant"
                             data-description="Food poster and promotional offer design for a restaurant campaign."
-                            data-image="biryani.png"
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -770,24 +820,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>FOOD POSTER</span>
 
-                    <h3>
-                        Aroma House Restaurant
-                    </h3>
+                    <h3>Aroma House Restaurant</h3>
 
-                    <p>
-                        Food poster and offer banner.
-                    </p>
+                    <p>Food poster and offer banner.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- WATCH -->
+            <!-- PROJECT 5 -->
 
             <article class="project-card">
 
@@ -795,16 +841,16 @@
 
                     <img
                         src="watch.png"
-                        alt="Smart Watch Advertisement"
+                        alt="Next Gen Smart Watch"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
+                            class="project-button"
+                            data-image="watch.png"
                             data-title="Next Gen Smart Watch"
                             data-description="E-commerce product advertisement designed to highlight a modern smart watch."
-                            data-image="watch.png"
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -814,24 +860,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>PRODUCT AD</span>
 
-                    <h3>
-                        Next Gen Smart Watch
-                    </h3>
+                    <h3>Next Gen Smart Watch</h3>
 
-                    <p>
-                        E-commerce product advertisement.
-                    </p>
+                    <p>E-commerce product advertisement.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- AI -->
+            <!-- PROJECT 6 -->
 
             <article class="project-card">
 
@@ -839,16 +881,16 @@
 
                     <img
                         src="ai.png"
-                        alt="The Future of AI Thumbnail"
+                        alt="The Future of AI"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
+                            class="project-button"
+                            data-image="ai.png"
                             data-title="The Future of AI"
                             data-description="A modern digital creative designed for online content and YouTube."
-                            data-image="ai.png"
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -858,24 +900,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>THUMBNAIL DESIGN</span>
 
-                    <h3>
-                        The Future of AI
-                    </h3>
+                    <h3>The Future of AI</h3>
 
-                    <p>
-                        High-impact digital content design.
-                    </p>
+                    <p>High-impact digital content design.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- BURGER -->
+            <!-- PROJECT 7 -->
 
             <article class="project-card">
 
@@ -883,16 +921,16 @@
 
                     <img
                         src="burger.png"
-                        alt="Burger Point Brand Design"
+                        alt="Burger Point"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
+                            class="project-button"
+                            data-image="burger.png"
                             data-title="Burger Point"
                             data-description="A bold food-brand creative featuring a strong visual identity and promotional presentation."
-                            data-image="burger.png"
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -902,24 +940,20 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>BRANDING</span>
 
-                    <h3>
-                        Burger Point
-                    </h3>
+                    <h3>Burger Point</h3>
 
-                    <p>
-                        Food brand identity concept.
-                    </p>
+                    <p>Food brand identity concept.</p>
 
                 </div>
 
             </article>
 
 
-            <!-- CARD -->
+            <!-- PROJECT 8 -->
 
             <article class="project-card">
 
@@ -930,13 +964,13 @@
                         alt="Floral Wedding Invitation"
                     >
 
-                    <div class="project-overlay">
+                    <div class="project-hover">
 
                         <button
-                            class="view-project"
-                            data-title="Wedding Invitation"
-                            data-description="A floral invitation design created with an elegant and decorative visual style."
+                            class="project-button"
                             data-image="card.png"
+                            data-title="Floral Wedding Invitation"
+                            data-description="A floral invitation design created with an elegant and decorative visual style."
                         >
                             View Project
                             <i class="fa-solid fa-arrow-up-right"></i>
@@ -946,17 +980,13 @@
 
                 </div>
 
-                <div class="project-info">
+                <div class="project-details">
 
                     <span>INVITATION DESIGN</span>
 
-                    <h3>
-                        Floral Wedding Invitation
-                    </h3>
+                    <h3>Floral Wedding Invitation</h3>
 
-                    <p>
-                        Elegant event invitation design.
-                    </p>
+                    <p>Elegant event invitation design.</p>
 
                 </div>
 
@@ -969,19 +999,19 @@
 </section>
 
 
-<!-- =========================================
+<!-- =====================================================
      CONTACT
-========================================= -->
+===================================================== -->
 
-<section class="section contact" id="contact">
+<section class="section contact-section" id="contact">
 
     <div class="container">
 
         <div class="contact-box">
 
-            <div class="contact-text">
+            <div class="contact-content">
 
-                <div class="section-label">
+                <div class="section-number">
                     05 — CONTACT
                 </div>
 
@@ -998,56 +1028,93 @@
             </div>
 
 
-            <div class="contact-buttons">
+            <div class="contact-links">
+
+
+                <!-- WHATSAPP -->
 
                 <a
                     href="https://wa.me/923335455760"
                     target="_blank"
-                    rel="noopener"
-                    class="contact-btn whatsapp-btn"
+                    rel="noopener noreferrer"
+                    class="contact-link whatsapp-contact"
                 >
-                    <i class="fa-brands fa-whatsapp"></i>
 
-                    <span>
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+
+                    <div>
                         <small>FAST ORDERS</small>
-                        WhatsApp Me
-                    </span>
+                        <strong>WhatsApp</strong>
+                    </div>
 
                     <i class="fa-solid fa-arrow-up-right"></i>
 
                 </a>
 
+
+                <!-- INSTAGRAM -->
 
                 <a
                     href="https://www.instagram.com/"
                     target="_blank"
-                    rel="noopener"
-                    class="contact-btn"
+                    rel="noopener noreferrer"
+                    class="contact-link"
                 >
-                    <i class="fa-brands fa-instagram"></i>
 
-                    <span>
-                        <small>SOCIAL</small>
-                        Instagram
-                    </span>
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+
+                    <div>
+                        <small>SOCIAL MEDIA</small>
+                        <strong>Instagram</strong>
+                    </div>
 
                     <i class="fa-solid fa-arrow-up-right"></i>
 
                 </a>
 
 
+                <!-- FACEBOOK -->
+
                 <a
                     href="https://www.facebook.com/"
                     target="_blank"
-                    rel="noopener"
-                    class="contact-btn"
+                    rel="noopener noreferrer"
+                    class="contact-link"
                 >
-                    <i class="fa-brands fa-facebook-f"></i>
 
-                    <span>
-                        <small>SOCIAL</small>
-                        Facebook
-                    </span>
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+
+                    <div>
+                        <small>SOCIAL MEDIA</small>
+                        <strong>Facebook</strong>
+                    </div>
+
+                    <i class="fa-solid fa-arrow-up-right"></i>
+
+                </a>
+
+
+                <!-- GMAIL -->
+
+                <a
+                    href="mailto:rebeimran@gmail.com"
+                    class="contact-link"
+                >
+
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <div>
+                        <small>EMAIL</small>
+                        <strong>Gmail</strong>
+                    </div>
 
                     <i class="fa-solid fa-arrow-up-right"></i>
 
@@ -1061,28 +1128,27 @@
 
 </section>
 
-</main>
 
-
-<!-- =========================================
+<!-- =====================================================
      PROJECT MODAL
-========================================= -->
+===================================================== -->
 
-<div class="modal" id="projectModal">
+<div class="project-modal" id="projectModal">
 
-    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-background" id="modalBackground"></div>
 
-    <div class="modal-box">
+    <div class="modal-container">
 
         <button
+            type="button"
             class="modal-close"
             id="modalClose"
-            aria-label="Close project"
+            aria-label="Close"
         >
             <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <div class="modal-image">
+        <div class="modal-image-container">
 
             <img
                 src=""
@@ -1092,7 +1158,7 @@
 
         </div>
 
-        <div class="modal-content">
+        <div class="modal-information">
 
             <span>PROJECT</span>
 
@@ -1103,8 +1169,8 @@
             <a
                 href="https://wa.me/923335455760"
                 target="_blank"
-                rel="noopener"
-                class="btn btn-gold"
+                rel="noopener noreferrer"
+                class="button primary-button"
             >
                 Discuss a Similar Project
                 <i class="fa-brands fa-whatsapp"></i>
@@ -1117,21 +1183,21 @@
 </div>
 
 
-<!-- =========================================
+<!-- =====================================================
      FOOTER
-========================================= -->
+===================================================== -->
 
 <footer>
 
-    <div class="container footer-content">
+    <div class="footer-main container">
 
         <div class="footer-brand">
 
             <a href="#home" class="brand">
 
-                <span class="brand-mark">R</span>
+                <span class="brand-logo">R</span>
 
-                <span class="brand-name">
+                <span class="brand-text">
                     Rebe Imran
                 </span>
 
@@ -1146,28 +1212,46 @@
 
         <div class="footer-socials">
 
+            <!-- WHATSAPP -->
+
             <a
                 href="https://wa.me/923335455760"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
             >
                 <i class="fa-brands fa-whatsapp"></i>
             </a>
 
+            <!-- INSTAGRAM -->
+
             <a
                 href="https://www.instagram.com/"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
             >
                 <i class="fa-brands fa-instagram"></i>
             </a>
 
+            <!-- FACEBOOK -->
+
             <a
                 href="https://www.facebook.com/"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
             >
                 <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <!-- GMAIL -->
+
+            <a
+                href="mailto:rebeimran@gmail.com"
+                aria-label="Gmail"
+            >
+                <i class="fa-solid fa-envelope"></i>
             </a>
 
         </div>
@@ -1175,7 +1259,7 @@
     </div>
 
 
-    <div class="container copyright">
+    <div class="footer-bottom container">
 
         <span>
             © 2026 Rebe Imran. All rights reserved.
