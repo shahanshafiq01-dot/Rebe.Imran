@@ -1,38 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================================
+    /* =====================================================
        MOBILE MENU
-    ========================================= */
+    ===================================================== */
 
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const navMenu = document.getElementById("navMenu");
 
-    if (menuBtn && navLinks) {
+    if (mobileMenu && navMenu) {
 
-        menuBtn.addEventListener("click", () => {
+        mobileMenu.addEventListener("click", function () {
 
-            navLinks.classList.toggle("open");
+            navMenu.classList.toggle("open");
 
-            const icon = menuBtn.querySelector("i");
+            const icon = mobileMenu.querySelector("i");
 
-            if (navLinks.classList.contains("open")) {
+            if (navMenu.classList.contains("open")) {
+
                 icon.classList.remove("fa-bars");
                 icon.classList.add("fa-xmark");
+
             } else {
+
                 icon.classList.remove("fa-xmark");
                 icon.classList.add("fa-bars");
+
             }
 
         });
 
 
-        navLinks.querySelectorAll("a").forEach(link => {
+        navMenu.querySelectorAll("a").forEach(function (link) {
 
-            link.addEventListener("click", () => {
+            link.addEventListener("click", function () {
 
-                navLinks.classList.remove("open");
+                navMenu.classList.remove("open");
 
-                const icon = menuBtn.querySelector("i");
+                const icon = mobileMenu.querySelector("i");
 
                 icon.classList.remove("fa-xmark");
                 icon.classList.add("fa-bars");
@@ -44,54 +48,221 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       PROJECT MODAL
-    ========================================= */
+    /* =====================================================
+       CV IMAGE
+       
+       PRIMARY FILE:
+       cv.jpeg
 
-    const modal = document.getElementById("projectModal");
-    const modalBackdrop = document.getElementById("modalBackdrop");
+       The code checks common capitalization variants only
+       if the primary lowercase file cannot be found.
+    ===================================================== */
+
+    const cvImage = document.getElementById("cvImage");
+    const cvError = document.getElementById("cvError");
+
+    const cvFiles = [
+        "cv.jpeg",
+        "cv.jpg",
+        "CV.jpeg",
+        "CV.jpg",
+        "cv.JPEG",
+        "CV.JPEG"
+    ];
+
+    let currentCvIndex = 0;
+
+
+    function tryNextCvFile() {
+
+        if (currentCvIndex >= cvFiles.length) {
+
+            if (cvError) {
+                cvError.classList.add("show");
+            }
+
+            return;
+        }
+
+        const file = cvFiles[currentCvIndex];
+
+        currentCvIndex++;
+
+        cvImage.src = file;
+
+    }
+
+
+    if (cvImage) {
+
+        cvImage.addEventListener("load", function () {
+
+            if (cvError) {
+                cvError.classList.remove("show");
+            }
+
+        });
+
+
+        cvImage.addEventListener("error", function () {
+
+            tryNextCvFile();
+
+        });
+
+
+        /* Start with the exact requested filename */
+
+        cvImage.src = "cv.jpeg";
+
+    }
+
+
+    /* =====================================================
+       CV OPEN / DOWNLOAD BUTTONS
+       
+       These buttons use the same working filename found
+       by the image checker.
+    ===================================================== */
+
+    const openCv = document.getElementById("openCv");
+    const downloadCv = document.getElementById("downloadCv");
+    const heroCvButton = document.getElementById("heroCvButton");
+
+
+    function updateCvLinks(filename) {
+
+        if (openCv) {
+            openCv.href = filename;
+        }
+
+        if (downloadCv) {
+            downloadCv.href = filename;
+        }
+
+        if (heroCvButton) {
+            heroCvButton.href = filename;
+        }
+
+    }
+
+
+    if (cvImage) {
+
+        cvImage.addEventListener("load", function () {
+
+            updateCvLinks(cvImage.src);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       PROFILE IMAGE
+       
+       PRIMARY FILE:
+       dp.jpeg
+    ===================================================== */
+
+    const profilePhoto = document.getElementById("profilePhoto");
+
+    const profileFiles = [
+        "dp.jpeg",
+        "dp.jpg",
+        "DP.jpeg",
+        "DP.jpg",
+        "dp.JPEG",
+        "DP.JPEG"
+    ];
+
+    let profileIndex = 0;
+
+
+    function tryNextProfile() {
+
+        if (profileIndex >= profileFiles.length) {
+            return;
+        }
+
+        profilePhoto.src = profileFiles[profileIndex];
+
+        profileIndex++;
+
+    }
+
+
+    if (profilePhoto) {
+
+        profilePhoto.addEventListener("error", function () {
+
+            tryNextProfile();
+
+        });
+
+        profilePhoto.src = "dp.jpeg";
+
+    }
+
+
+    /* =====================================================
+       PROJECT MODAL
+    ===================================================== */
+
+    const projectModal = document.getElementById("projectModal");
+    const modalBackground = document.getElementById("modalBackground");
     const modalClose = document.getElementById("modalClose");
 
     const modalImage = document.getElementById("modalImage");
     const modalTitle = document.getElementById("modalTitle");
-    const modalDescription = document.getElementById("modalDescription");
+    const modalDescription =
+        document.getElementById("modalDescription");
 
-    const projectButtons = document.querySelectorAll(".view-project");
+    const projectButtons =
+        document.querySelectorAll(".project-button");
 
 
-    function openModal(button) {
+    function openProject(button) {
 
-        const title = button.getAttribute("data-title");
-        const description = button.getAttribute("data-description");
-        const image = button.getAttribute("data-image");
+        const image =
+            button.getAttribute("data-image");
 
-        modalTitle.textContent = title;
-        modalDescription.textContent = description;
+        const title =
+            button.getAttribute("data-title");
+
+        const description =
+            button.getAttribute("data-description");
+
 
         modalImage.src = image;
         modalImage.alt = title;
 
-        modal.classList.add("active");
+        modalTitle.textContent = title;
 
-        document.body.style.overflow = "hidden";
-
-    }
+        modalDescription.textContent = description;
 
 
-    function closeModal() {
+        projectModal.classList.add("active");
 
-        modal.classList.remove("active");
-
-        document.body.style.overflow = "";
+        document.body.classList.add("modal-open");
 
     }
 
 
-    projectButtons.forEach(button => {
+    function closeProject() {
 
-        button.addEventListener("click", () => {
+        projectModal.classList.remove("active");
 
-            openModal(button);
+        document.body.classList.remove("modal-open");
+
+    }
+
+
+    projectButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            openProject(button);
 
         });
 
@@ -100,61 +271,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (modalClose) {
 
-        modalClose.addEventListener("click", closeModal);
+        modalClose.addEventListener(
+            "click",
+            closeProject
+        );
 
     }
 
 
-    if (modalBackdrop) {
+    if (modalBackground) {
 
-        modalBackdrop.addEventListener("click", closeModal);
+        modalBackground.addEventListener(
+            "click",
+            closeProject
+        );
 
     }
 
 
-    document.addEventListener("keydown", event => {
+    document.addEventListener("keydown", function (event) {
 
         if (event.key === "Escape") {
 
-            closeModal();
+            closeProject();
 
         }
 
     });
 
 
-    /* =========================================
+    /* =====================================================
        ACTIVE NAVIGATION
-    ========================================= */
+    ===================================================== */
 
-    const sections = document.querySelectorAll("main section[id]");
-    const links = document.querySelectorAll(".nav-links a");
+    const sections =
+        document.querySelectorAll("section[id]");
 
-    function updateActiveNav() {
+    const navLinks =
+        document.querySelectorAll(".nav-menu a");
 
-        let currentSection = "";
 
-        sections.forEach(section => {
+    function updateNavigation() {
 
-            const sectionTop = section.offsetTop - 120;
+        let current = "";
+
+        sections.forEach(function (section) {
+
+            const sectionTop =
+                section.offsetTop - 140;
 
             if (window.scrollY >= sectionTop) {
 
-                currentSection = section.getAttribute("id");
+                current =
+                    section.getAttribute("id");
 
             }
 
         });
 
 
-        links.forEach(link => {
+        navLinks.forEach(function (link) {
 
             link.classList.remove("active");
 
-            if (
-                link.getAttribute("href") ===
-                "#" + currentSection
-            ) {
+            const target =
+                link.getAttribute("href");
+
+            if (target === "#" + current) {
 
                 link.classList.add("active");
 
@@ -165,25 +348,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    window.addEventListener("scroll", updateActiveNav);
+    window.addEventListener(
+        "scroll",
+        updateNavigation
+    );
 
-    updateActiveNav();
+
+    updateNavigation();
 
 
-    /* =========================================
-       IMAGE ERROR HANDLING
-       Keeps broken images from looking confusing.
-    ========================================= */
+    /* =====================================================
+       CLOSE MOBILE MENU WHEN WINDOW RESIZES
+    ===================================================== */
 
-    const images = document.querySelectorAll("img");
+    window.addEventListener("resize", function () {
 
-    images.forEach(img => {
+        if (window.innerWidth > 800) {
 
-        img.addEventListener("error", () => {
+            navMenu.classList.remove("open");
+
+            const icon =
+                mobileMenu.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+
+    /* =====================================================
+       IMAGE DEBUGGING
+    ===================================================== */
+
+    document.querySelectorAll("img").forEach(function (image) {
+
+        image.addEventListener("error", function () {
 
             console.warn(
-                "Image could not be loaded:",
-                img.getAttribute("src")
+                "Could not load image:",
+                image.getAttribute("src")
             );
 
         });
