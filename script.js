@@ -1,113 +1,25 @@
-/* =====================================================
+/* =========================================================
    REBE IMRAN PORTFOLIO
-   MAIN JAVASCRIPT
-===================================================== */
+   JAVASCRIPT
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =================================================
-       MOBILE NAVIGATION
-    ================================================= */
 
-    const menuButton = document.getElementById("menuButton");
-    const navMenu = document.getElementById("navMenu");
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-    if (menuButton && navMenu) {
+    const menuButton =
+        document.getElementById("menuButton");
 
-        menuButton.addEventListener("click", () => {
+    const navMenu =
+        document.getElementById("navMenu");
 
-            navMenu.classList.toggle("active");
+    const navbar =
+        document.getElementById("navbar");
 
-            const icon = menuButton.querySelector("i");
-
-            if (navMenu.classList.contains("active")) {
-
-                icon.classList.remove("fa-bars");
-                icon.classList.add("fa-xmark");
-
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Close navigation"
-                );
-
-            } else {
-
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
-
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Open navigation"
-                );
-            }
-
-        });
-
-
-        /* Close menu when navigation link is clicked */
-
-        const navLinks = navMenu.querySelectorAll("a");
-
-        navLinks.forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                navMenu.classList.remove("active");
-
-                const icon = menuButton.querySelector("i");
-
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
-
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Open navigation"
-                );
-
-            });
-
-        });
-
-    }
-
-
-    /* =================================================
-       CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
-    ================================================= */
-
-    document.addEventListener("click", (event) => {
-
-        if (!navMenu || !menuButton) return;
-
-        const clickedInsideMenu =
-            navMenu.contains(event.target);
-
-        const clickedButton =
-            menuButton.contains(event.target);
-
-        if (
-            navMenu.classList.contains("active") &&
-            !clickedInsideMenu &&
-            !clickedButton
-        ) {
-
-            navMenu.classList.remove("active");
-
-            const icon = menuButton.querySelector("i");
-
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
-
-        }
-
-    });
-
-
-    /* =================================================
-       PROJECT MODAL
-    ================================================= */
-
-    const projectModal =
+    const modal =
         document.getElementById("projectModal");
 
     const modalOverlay =
@@ -125,116 +37,245 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalDescription =
         document.getElementById("modalDescription");
 
-
-    const projectButtons =
-        document.querySelectorAll(".view-project");
-
-
-    /* Open project modal */
-
-    projectButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const image =
-                button.getAttribute("data-image");
-
-            const title =
-                button.getAttribute("data-title");
-
-            const description =
-                button.getAttribute("data-description");
+    const currentYear =
+        document.getElementById("currentYear");
 
 
-            if (modalImage) {
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
 
-                modalImage.src = image;
+    function openMenu() {
 
-                modalImage.alt = title;
+        if (!navMenu || !menuButton) {
+            return;
+        }
 
-            }
+        navMenu.classList.add("active");
 
-
-            if (modalTitle) {
-
-                modalTitle.textContent =
-                    title || "Project";
-
-            }
-
-
-            if (modalDescription) {
-
-                modalDescription.textContent =
-                    description || "";
-
-            }
-
-
-            if (projectModal) {
-
-                projectModal.classList.add("active");
-
-                document.body.style.overflow = "hidden";
-
-            }
-
-        });
-
-    });
-
-
-    /* Close modal function */
-
-    function closeModal() {
-
-        if (!projectModal) return;
-
-        projectModal.classList.remove("active");
-
-        document.body.style.overflow = "";
-
-    }
-
-
-    if (modalClose) {
-
-        modalClose.addEventListener(
-            "click",
-            closeModal
+        menuButton.setAttribute(
+            "aria-expanded",
+            "true"
         );
 
-    }
-
-
-    if (modalOverlay) {
-
-        modalOverlay.addEventListener(
-            "click",
-            closeModal
+        menuButton.setAttribute(
+            "aria-label",
+            "Close navigation"
         );
 
-    }
+        const icon =
+            menuButton.querySelector("i");
 
+        if (icon) {
 
-    /* =================================================
-       ESC KEY CLOSES MODAL
-    ================================================= */
+            icon.classList.remove(
+                "fa-bars"
+            );
 
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-
-            closeModal();
+            icon.classList.add(
+                "fa-xmark"
+            );
 
         }
 
-    });
+        document.body.classList.add(
+            "menu-open"
+        );
+
+    }
 
 
-    /* =================================================
-       SMOOTH SCROLL
-    ================================================= */
+    function closeMenu() {
+
+        if (!navMenu || !menuButton) {
+            return;
+        }
+
+        navMenu.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        menuButton.setAttribute(
+            "aria-label",
+            "Open navigation"
+        );
+
+        const icon =
+            menuButton.querySelector("i");
+
+        if (icon) {
+
+            icon.classList.remove(
+                "fa-xmark"
+            );
+
+            icon.classList.add(
+                "fa-bars"
+            );
+
+        }
+
+        document.body.classList.remove(
+            "menu-open"
+        );
+
+    }
+
+
+    if (menuButton) {
+
+        menuButton.addEventListener(
+            "click",
+            (event) => {
+
+                event.stopPropagation();
+
+                if (
+                    navMenu &&
+                    navMenu.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closeMenu();
+
+                } else {
+
+                    openMenu();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE MENU AFTER NAVIGATION
+    ===================================================== */
+
+    if (navMenu) {
+
+        const links =
+            navMenu.querySelectorAll(
+                "a"
+            );
+
+        links.forEach(link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    closeMenu();
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CLOSE MENU OUTSIDE
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            if (!navMenu || !menuButton) {
+                return;
+            }
+
+            if (
+                navMenu.classList.contains(
+                    "active"
+                ) &&
+                !navMenu.contains(
+                    event.target
+                ) &&
+                !menuButton.contains(
+                    event.target
+                )
+            ) {
+
+                closeMenu();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE MENU ON ESC
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                navMenu &&
+                navMenu.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeMenu();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       NAVBAR SCROLL EFFECT
+    ===================================================== */
+
+    function updateNavbar() {
+
+        if (!navbar) {
+            return;
+        }
+
+        if (window.scrollY > 20) {
+
+            navbar.classList.add(
+                "scrolled"
+            );
+
+        } else {
+
+            navbar.classList.remove(
+                "scrolled"
+            );
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateNavbar,
+        { passive: true }
+    );
+
+    updateNavbar();
+
+
+    /* =====================================================
+       SMOOTH INTERNAL LINKS
+    ===================================================== */
 
     const internalLinks =
         document.querySelectorAll(
@@ -244,114 +285,130 @@ document.addEventListener("DOMContentLoaded", () => {
 
     internalLinks.forEach(link => {
 
-        link.addEventListener("click", event => {
+        link.addEventListener(
+            "click",
+            event => {
 
-            const targetId =
-                link.getAttribute("href");
+                const targetID =
+                    link.getAttribute(
+                        "href"
+                    );
 
-            if (
-                !targetId ||
-                targetId === "#"
-            ) {
-                return;
+                if (
+                    !targetID ||
+                    targetID === "#"
+                ) {
+
+                    return;
+
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetID
+                    );
+
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const navbarHeight =
+                    navbar
+                        ? navbar.offsetHeight
+                        : 0;
+
+
+                const targetPosition =
+                    target.getBoundingClientRect()
+                        .top +
+                    window.scrollY -
+                    navbarHeight;
+
+
+                window.scrollTo({
+
+                    top: targetPosition,
+
+                    behavior: "smooth"
+
+                });
+
             }
-
-
-            const target =
-                document.querySelector(targetId);
-
-
-            if (!target) return;
-
-
-            event.preventDefault();
-
-
-            const navbar =
-                document.querySelector(".navbar");
-
-
-            const navbarHeight =
-                navbar
-                    ? navbar.offsetHeight
-                    : 0;
-
-
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.pageYOffset -
-                navbarHeight;
-
-
-            window.scrollTo({
-
-                top: targetPosition,
-
-                behavior: "smooth"
-
-            });
-
-        });
+        );
 
     });
 
 
-    /* =================================================
-       ACTIVE NAVIGATION LINK
-    ================================================= */
+    /* =====================================================
+       ACTIVE NAVIGATION
+    ===================================================== */
 
     const sections =
         document.querySelectorAll(
             "section[id]"
         );
 
-    const navigationLinks =
+    const navLinks =
         document.querySelectorAll(
-            ".nav-menu a"
+            ".nav-link"
         );
 
 
-    function updateActiveNavigation() {
+    function updateActiveLink() {
 
-        let currentSection = "";
+        let current =
+            "home";
 
 
         sections.forEach(section => {
 
             const sectionTop =
-                section.offsetTop - 140;
+                section.offsetTop - 180;
 
-            const sectionHeight =
+            const sectionBottom =
+                sectionTop +
                 section.offsetHeight;
+
 
             if (
                 window.scrollY >= sectionTop &&
-                window.scrollY <
-                sectionTop + sectionHeight
+                window.scrollY < sectionBottom
             ) {
 
-                currentSection =
-                    section.getAttribute("id");
+                current =
+                    section.id;
 
             }
 
         });
 
 
-        navigationLinks.forEach(link => {
+        navLinks.forEach(link => {
 
-            link.classList.remove("active");
+            link.classList.remove(
+                "active"
+            );
+
 
             const href =
-                link.getAttribute("href");
+                link.getAttribute(
+                    "href"
+                );
 
 
             if (
-                href ===
-                "#" + currentSection
+                href === "#" + current
             ) {
 
-                link.classList.add("active");
+                link.classList.add(
+                    "active"
+                );
 
             }
 
@@ -362,73 +419,210 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener(
         "scroll",
-        updateActiveNavigation,
+        updateActiveLink,
         { passive: true }
     );
 
 
-    updateActiveNavigation();
+    updateActiveLink();
 
 
-    /* =================================================
-       CV / DP IMAGE FALLBACK CHECK
-    ================================================= */
+    /* =====================================================
+       PROJECT MODAL
+    ===================================================== */
 
-    const dpImage =
-        document.querySelector(".dp");
+    const projectButtons =
+        document.querySelectorAll(
+            ".view-project"
+        );
 
-    const cvImage =
-        document.querySelector(".cv-preview img");
+
+    function openProject(
+        image,
+        title,
+        description
+    ) {
+
+        if (!modal) {
+            return;
+        }
 
 
-    /*
-       DP fallback:
-       If dp.jpeg cannot be found, keep the alt text
-       visible instead of showing a broken layout.
-    */
+        if (modalImage) {
 
-    if (dpImage) {
+            modalImage.src =
+                image || "";
 
-        dpImage.addEventListener(
-            "error",
+            modalImage.alt =
+                title || "Project";
+
+        }
+
+
+        if (modalTitle) {
+
+            modalTitle.textContent =
+                title || "Project";
+
+        }
+
+
+        if (modalDescription) {
+
+            modalDescription.textContent =
+                description || "";
+
+        }
+
+
+        modal.classList.add(
+            "active"
+        );
+
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        if (modalClose) {
+
+            setTimeout(() => {
+
+                modalClose.focus();
+
+            }, 100);
+
+        }
+
+    }
+
+
+    function closeProject() {
+
+        if (!modal) {
+            return;
+        }
+
+
+        modal.classList.remove(
+            "active"
+        );
+
+
+        modal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+
+        if (modalImage) {
+
+            modalImage.src = "";
+
+        }
+
+    }
+
+
+    projectButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
             () => {
 
-                dpImage.style.display = "none";
+                const image =
+                    button.dataset.image;
 
-                const parent =
-                    dpImage.parentElement;
+                const title =
+                    button.dataset.title;
 
-                if (parent) {
+                const description =
+                    button.dataset.description;
 
-                    parent.setAttribute(
-                        "data-image-error",
-                        "Profile image could not be loaded"
-                    );
 
-                }
+                openProject(
+                    image,
+                    title,
+                    description
+                );
 
             }
+        );
+
+    });
+
+
+    if (modalClose) {
+
+        modalClose.addEventListener(
+            "click",
+            closeProject
         );
 
     }
 
 
-    /*
-       CV fallback:
-       The CV itself remains clickable through the
-       Open CV / Download CV buttons.
-    */
+    if (modalOverlay) {
 
-    if (cvImage) {
+        modalOverlay.addEventListener(
+            "click",
+            closeProject
+        );
 
-        cvImage.addEventListener(
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                modal &&
+                modal.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeProject();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CV IMAGE CHECK
+    ===================================================== */
+
+    const cvImages =
+        document.querySelectorAll(
+            '.cv-preview img'
+        );
+
+
+    cvImages.forEach(image => {
+
+        image.addEventListener(
             "error",
             () => {
 
-                cvImage.style.display = "none";
-
                 const preview =
-                    cvImage.parentElement;
+                    image.closest(
+                        ".cv-preview"
+                    );
+
 
                 if (preview) {
 
@@ -436,98 +630,62 @@ document.addEventListener("DOMContentLoaded", () => {
                         "cv-image-error"
                     );
 
-                    preview.setAttribute(
-                        "data-message",
-                        "CV image could not be loaded"
-                    );
-
                 }
 
             }
         );
 
-    }
+    });
 
 
-    /* =================================================
-       CURRENT YEAR
-    ================================================= */
+    /* =====================================================
+       DP IMAGE CHECK
+    ===================================================== */
 
-    const footerYear =
+    const dp =
         document.querySelector(
-            ".footer-bottom span"
+            ".dp"
         );
 
 
-    if (footerYear) {
+    if (dp) {
 
-        footerYear.innerHTML =
-            footerYear.innerHTML.replace(
-                "2026",
-                new Date().getFullYear()
-            );
-
-    }
-
-
-    /* =================================================
-       PREVENT BODY HORIZONTAL OVERFLOW
-    ================================================= */
-
-    document.body.style.overflowX = "hidden";
-
-
-    /* =================================================
-       BUTTON CLICK FEEDBACK
-    ================================================= */
-
-    const buttons =
-        document.querySelectorAll(
-            ".btn, .cv-btn, .top-whatsapp"
-        );
-
-
-    buttons.forEach(button => {
-
-        button.addEventListener(
-            "click",
+        dp.addEventListener(
+            "error",
             () => {
 
-                button.classList.add(
-                    "clicked"
+                console.warn(
+                    "dp.jpeg could not be loaded."
                 );
-
-
-                setTimeout(() => {
-
-                    button.classList.remove(
-                        "clicked"
-                    );
-
-                }, 250);
 
             }
         );
 
-    });
+    }
 
 
-    /* =================================================
-       IMAGE LOADING
-    ================================================= */
+    /* =====================================================
+       PROJECT IMAGE ERROR CHECK
+    ===================================================== */
 
-    const allImages =
-        document.querySelectorAll("img");
+    const projectImages =
+        document.querySelectorAll(
+            ".project-image img"
+        );
 
 
-    allImages.forEach(image => {
+    projectImages.forEach(image => {
 
         image.addEventListener(
-            "load",
+            "error",
             () => {
 
-                image.classList.add(
-                    "image-loaded"
+                image.style.opacity =
+                    "0.25";
+
+                console.warn(
+                    "Project image could not be loaded:",
+                    image.src
                 );
 
             }
@@ -536,9 +694,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =================================================
-       RESIZE HANDLER
-    ================================================= */
+    /* =====================================================
+       CURRENT YEAR
+    ===================================================== */
+
+    if (currentYear) {
+
+        currentYear.textContent =
+            new Date().getFullYear();
+
+    }
+
+
+    /* =====================================================
+       WINDOW RESIZE
+    ===================================================== */
 
     let resizeTimer;
 
@@ -547,47 +717,19 @@ document.addEventListener("DOMContentLoaded", () => {
         "resize",
         () => {
 
-            clearTimeout(resizeTimer);
+            clearTimeout(
+                resizeTimer
+            );
 
 
             resizeTimer =
                 setTimeout(() => {
 
-                    /*
-                       Automatically close mobile
-                       navigation when switching back
-                       to desktop width.
-                    */
-
                     if (
-                        window.innerWidth > 800 &&
-                        navMenu
+                        window.innerWidth > 850
                     ) {
 
-                        navMenu.classList.remove(
-                            "active"
-                        );
-
-                        if (menuButton) {
-
-                            const icon =
-                                menuButton.querySelector(
-                                    "i"
-                                );
-
-                            if (icon) {
-
-                                icon.classList.remove(
-                                    "fa-xmark"
-                                );
-
-                                icon.classList.add(
-                                    "fa-bars"
-                                );
-
-                            }
-
-                        }
+                        closeMenu();
 
                     }
 
@@ -597,9 +739,53 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* =================================================
-       CONSOLE MESSAGE
-    ================================================= */
+    /* =====================================================
+       PREVENT HORIZONTAL OVERFLOW
+    ===================================================== */
+
+    document.body.style.overflowX =
+        "hidden";
+
+
+    /* =====================================================
+       IMAGE LOADING
+    ===================================================== */
+
+    const images =
+        document.querySelectorAll(
+            "img"
+        );
+
+
+    images.forEach(image => {
+
+        if (image.complete) {
+
+            image.classList.add(
+                "image-loaded"
+            );
+
+        } else {
+
+            image.addEventListener(
+                "load",
+                () => {
+
+                    image.classList.add(
+                        "image-loaded"
+                    );
+
+                }
+            );
+
+        }
+
+    });
+
+
+    /* =====================================================
+       PAGE READY
+    ===================================================== */
 
     console.log(
         "Rebe Imran Portfolio loaded successfully."
